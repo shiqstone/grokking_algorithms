@@ -22,15 +22,15 @@ func main() {
 	redisConn := "127.0.0.1:6379"
 	redisAuth := "auth"
 	con,err := redis.Dial("tcp", redisConn)//redis connect
-    defer con.Close()
+	defer con.Close()
 
-    bloom := NewRBloomFilter(con) //create bloom_filter
+	bloom := NewRBloomFilter(con) //create bloom_filter
 	bloom.Conn.Do("auth", redisAuth)
-    bloom.Add(str1)
+	bloom.Add(str1)
 	bloom.Add(str2)
 	bloom.Add(str3)
 	fmt.Println(bloom.Exist(str1))
 	fmt.Println(bloom.Exist(str2))
 	fmt.Println(bloom.Exist(str3))
-    fmt.Println(bloom.Exist("freedom!"))
+	fmt.Println(bloom.Exist("freedom!"))
 }
